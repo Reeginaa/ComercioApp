@@ -23,7 +23,7 @@ import javax.servlet.http.HttpServletResponse;
 public class CartaoFidelidadeServletController extends HttpServlet {
 
     GenericDao<CartaoFidelidade> daoCartaoFidelidade = new GenericDao(CartaoFidelidade.class);
-    GenericDao<Funcionario> daoFuncionario = new GenericDao(Funcionario.class);
+    GenericDao<Funcionario> daoCliente = new GenericDao(Funcionario.class);
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
@@ -87,7 +87,7 @@ public class CartaoFidelidadeServletController extends HttpServlet {
             Logger.getLogger(CartaoFidelidadeServletController.class.getName()).log(Level.SEVERE, null, ex);
         }
         req.setAttribute("obj", obj);
-        req.setAttribute("listCliente", daoFuncionario.findEntities());
+        req.setAttribute("listCliente", daoCliente.findEntities());
         req.setAttribute("action", "edit");
         String nextJSP = "/jsp/form-cartaoFidelidade.jsp";
         RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(nextJSP);
@@ -144,8 +144,8 @@ public class CartaoFidelidadeServletController extends HttpServlet {
             HttpServletResponse resp)
             throws ServletException, IOException {
         String nextJSP = "/jsp/form-cartaoFidelidade.jsp";
-        List<Funcionario> list = daoFuncionario.findEntities();
-        req.setAttribute("listFuncionario", list);
+        List<Funcionario> list = daoCliente.findEntities();
+        req.setAttribute("listCliente", list);
         RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(nextJSP);
         dispatcher.forward(req, resp);
     }
@@ -158,9 +158,9 @@ public class CartaoFidelidadeServletController extends HttpServlet {
             Double qtdPontos = Double.parseDouble(req.getParameter("qtdPontos"));
             Double fatorConversao = Double.parseDouble(req.getParameter("fatorConversao"));
             Integer senha = Integer.parseInt(req.getParameter("senha"));
-            long idFuncionario = Long.parseLong(req.getParameter("cliente"));
+            long idCliente = Long.parseLong(req.getParameter("cliente"));
 
-            CartaoFidelidade obj = new CartaoFidelidade(null, vencimento, limite, qtdPontos, fatorConversao, senha, daoFuncionario.findEntity(idFuncionario), null);
+            CartaoFidelidade obj = new CartaoFidelidade(null, vencimento, limite, qtdPontos, fatorConversao, senha, daoCliente.findEntity(idCliente), null);
             daoCartaoFidelidade.create(obj);
             long id = obj.getId();
             req.setAttribute("id", id);
@@ -179,9 +179,9 @@ public class CartaoFidelidadeServletController extends HttpServlet {
         Double qtdPontos = Double.parseDouble(req.getParameter("qtdPontos"));
         Double fatorConversao = Double.parseDouble(req.getParameter("fatorConversao"));
         Integer senha = Integer.parseInt(req.getParameter("senha"));
-        long idFuncionario = Long.parseLong(req.getParameter("cliente"));
+        long idCliente = Long.parseLong(req.getParameter("cliente"));
 
-        CartaoFidelidade obj = new CartaoFidelidade(null, vencimento, limite, qtdPontos, fatorConversao, senha, daoFuncionario.findEntity(idFuncionario), null);
+        CartaoFidelidade obj = new CartaoFidelidade(null, vencimento, limite, qtdPontos, fatorConversao, senha, daoCliente.findEntity(idCliente), null);
 
         boolean success = false;
         try {
