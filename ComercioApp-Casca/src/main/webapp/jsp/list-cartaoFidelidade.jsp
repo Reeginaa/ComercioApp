@@ -1,7 +1,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@include file="../header.jspf" %>
 <div class="container">
-    <h2>Cidade</h2>
+    <h2>Cartão Fidelidade</h2>
     
     <!--Search Form -->
     <form action="/cartaoFidelidade" method="get" id="searchCartaoFidelidade" role="form">
