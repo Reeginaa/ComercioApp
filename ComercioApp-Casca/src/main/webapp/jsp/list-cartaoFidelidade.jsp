@@ -35,7 +35,7 @@
         <input type="hidden" id="action" name="action">
         <c:choose>
             <c:when test="${not empty entities}">
-                <table  class="table-black table-xl col-xs-10">
+                <table  class="table table-dark table-responsive-lg">
                     <thead>
                         <tr>
                             <td>#</td>
@@ -48,7 +48,7 @@
                         </tr>
                     </thead>
                     <c:forEach var="obj" items="${entities}">
-                        <tr class="${id == obj.id?"info":""}">
+                        <tr class="${id == obj.id?"info":""}" scope="row">
                             <td>
                                 <c:if test="${permissao.getAlterar()}">
                                     <a href="/cartaoFidelidade?id=${obj.id}&search=searchById">${obj.id}</a>
