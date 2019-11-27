@@ -5,6 +5,7 @@ import br.upf.ads.paw.entidades.CartaoFidelidade;
 import br.upf.ads.paw.entidades.Funcionario;
 import br.upf.ads.paw.entidades.Permissao;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -160,7 +161,7 @@ public class CartaoFidelidadeServletController extends HttpServlet {
             Integer senha = Integer.parseInt(req.getParameter("senha"));
             long idCliente = Long.parseLong(req.getParameter("cliente"));
 
-            CartaoFidelidade obj = new CartaoFidelidade(null, vencimento, limite, qtdPontos, fatorConversao, senha, daoCliente.findEntity(idCliente), null);
+            CartaoFidelidade obj = new CartaoFidelidade(null, vencimento, limite, qtdPontos, fatorConversao, senha, daoCliente.findEntity(idCliente), new ArrayList<>());
             daoCartaoFidelidade.create(obj);
             long id = obj.getId();
             req.setAttribute("id", id);
@@ -181,7 +182,7 @@ public class CartaoFidelidadeServletController extends HttpServlet {
         Integer senha = Integer.parseInt(req.getParameter("senha"));
         long idCliente = Long.parseLong(req.getParameter("cliente"));
 
-        CartaoFidelidade obj = new CartaoFidelidade(null, vencimento, limite, qtdPontos, fatorConversao, senha, daoCliente.findEntity(idCliente), null);
+        CartaoFidelidade obj = new CartaoFidelidade(id, vencimento, limite, qtdPontos, fatorConversao, senha, daoCliente.findEntity(idCliente), new ArrayList<>());
 
         boolean success = false;
         try {
@@ -207,9 +208,7 @@ public class CartaoFidelidadeServletController extends HttpServlet {
             daoCartaoFidelidade.destroy(id);
             confirm = true;
         } catch (Exception ex) {
-            /*String message = "ERRO: Cidade sendo usada por outra entidade.";
-            req.setAttribute("message", message);
-            Logger.getLogger(CartaoFidelidadeServletController.class.getName()).log(Level.SEVERE, null, ex);*/
+            Logger.getLogger(CartaoFidelidadeServletController.class.getName()).log(Level.SEVERE, null, ex);
         }
         if (confirm) {
             String message = "O registro foi removido com sucesso.";
