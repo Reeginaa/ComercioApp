@@ -6,7 +6,7 @@
     <!--Search Form -->
     <form action="/cartaoFidelidade" method="get" id="searchCartaoFidelidade" role="form">
         <input type="hidden" id="action" name="action" value="search">
-        <div class="form-group col-xs-5">
+        <div class="form-group-lg col-xs-5">
             <input type="text" name="search" id="search" class="form-control" required="true" placeholder="Digite a descrição da cidade a procurar"/>                    
         </div>
         <button type="submit" class="btn btn-info">
@@ -35,7 +35,7 @@
         <input type="hidden" id="action" name="action">
         <c:choose>
             <c:when test="${not empty entities}">
-                <table  class="table-striped table-xl col-xs-10">
+                <table  class="table-black table-xl col-xs-10">
                     <thead>
                         <tr>
                             <td>#</td>
@@ -64,7 +64,7 @@
                             <td>${obj.cliente}</td>
                             <td> <td>
                                 <c:if test="${permissao.getExcluir()}">
-                                    <a href="#" id="remove" 
+                                    <a href="#" id="removeById" 
                                        onclick="document.getElementById('action').value = 'remove';document.getElementById('id').value = '${obj.id}';
                                                document.getElementById('cartaoFidelidadeForm').submit();"> 
                                         <span class="glyphicon glyphicon-trash"/>
